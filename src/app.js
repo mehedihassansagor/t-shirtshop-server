@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-var fs = require('fs');
-var path = require('path');
+// var fs = require('fs');
+// var path = require('path');
 var bodyParser = require('body-parser');
 
 require("./db/connection");
@@ -15,6 +15,7 @@ app.use(require("./route/auth"))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.set("view engine", "ejs");
+
 
 
 app.listen(port, () => {

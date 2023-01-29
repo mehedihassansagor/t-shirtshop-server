@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const validator = require("validator");
 
 const tshirtSchema = new mongoose.Schema({
   name: {
@@ -7,6 +6,7 @@ const tshirtSchema = new mongoose.Schema({
     minLength: 3,
     required: true,
   },
+  desc: String,
   image: {
     data: Buffer,
     contentType: String,
@@ -19,10 +19,6 @@ const tshirtSchema = new mongoose.Schema({
   type: {
     type: String,
     minLength: 3,
-  },
-  date: {
-    type: Date,
-    default: Date.now,
   },
 });
 
