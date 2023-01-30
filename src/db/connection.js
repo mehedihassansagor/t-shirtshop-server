@@ -9,9 +9,9 @@ const dbUrl = "mongodb+srv://sagor:sagor123@cluster0.gbb5ldr.mongodb.net/tshirt?
 mongoose.connect(dbUrl, 
     {
         //now they are not use
-    // useNewUrlParser: true,
+    useNewUrlParser: true,
     // useCreateIndex: true,
-    // useUnifiedTopology: true,
+    useUnifiedTopology: true,
     // useFindAndModify: false,
     // mongoDatabaseName: "studentLogin",
     

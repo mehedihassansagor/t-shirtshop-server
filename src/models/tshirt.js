@@ -1,13 +1,11 @@
 const mongoose = require("mongoose");
-
 const tshirtSchema = new mongoose.Schema({
   name: {
     type: String,
     minLength: 3,
-    required: true,
   },
   desc: String,
-  image: {
+  img: {
     data: Buffer,
     contentType: String,
   },
