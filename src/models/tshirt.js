@@ -20,6 +20,6 @@ const tshirtSchema = new mongoose.Schema({
   },
 });
 
-const Tshirt = new mongoose.model("Tshirt", tshirtSchema);
+const Tshirt = new mongoose.model("TshirtCollection", tshirtSchema);
 
 module.exports = Tshirt;

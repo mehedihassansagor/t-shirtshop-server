@@ -63,11 +63,25 @@ router.post("/tshirt", upload.single("img"), async (req, res, next) => {
         item.save();
         // res.redirect("/tshirt");
         res.send(item);
+        console.log(item);
       }
     });
   } catch (err) {
     console.log(err);
   }
 });
+
+
+//GET DATA
+
+router.get("/tshirt", async (req, res) => {
+  try {
+    const tshirtadat = await Tshirt.find();
+    res.send(tshirtadat);
+  } catch (err) {
+    res.send(err);
+  }
+});
+
 
 module.exports = router;
