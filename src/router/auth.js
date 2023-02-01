@@ -14,18 +14,30 @@ router.get("/", (req, res) => {
 //multer
 
 var storage = multer.diskStorage({
+  
   destination: (req, file, cb) => {
     cb(null, "uploads");
+    
   },
 
   filename: (req, file, cb) => {
     const ext = path.extname(file.originalname);
-    const fileName = file.originalname.replace(ext, " ") + "_" + Date.now();
+    const fileName = file.originalname
+    .replace(ext, " ") 
+    .toLocaleLowerCase()
+    .split(" ")
+    .join(".") + "_" + Date.now(); 
     cb(null, fileName + ext);
+    
   },
 });
 
-var upload = multer({ storage: storage });
+var upload = multer({ 
+  storage: storage,
+  limits: {
+    fileSize: 1000000,
+  },
+});
 
 // post data
 // router.post("/tshirt", async (req, res) => {
@@ -41,19 +53,21 @@ var upload = multer({ storage: storage });
 
 //POST IMAGE OR OBJECTS
 router.post("/tshirt", upload.single("img"), async (req, res, next) => {
+  console.log(req.file)
   try {
     var obj = {
       name: req.body.name,
-
       img: {
         data: fs.readFileSync(
           path.join(__dirname + "../../../uploads/" + req.file.filename)
         ),
         contentType: "img/png",
       },
+      
       size: req.body.size,
       type: req.body.type,
       desc: req.body.desc,
+      path: req.file.path,
     };
     await Tshirt.create(obj, (err, item) => {
       if (err) {
@@ -63,7 +77,6 @@ router.post("/tshirt", upload.single("img"), async (req, res, next) => {
         item.save();
         // res.redirect("/tshirt");
         res.send(item);
-        console.log(item);
       }
     });
   } catch (err) {
@@ -76,8 +89,8 @@ router.post("/tshirt", upload.single("img"), async (req, res, next) => {
 
 router.get("/tshirt", async (req, res) => {
   try {
-    const tshirtadat = await Tshirt.find();
-    res.send(tshirtadat);
+    const tshirtadata = await Tshirt.find();
+    res.send(tshirtadata);
   } catch (err) {
     res.send(err);
   }

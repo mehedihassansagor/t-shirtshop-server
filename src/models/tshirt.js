@@ -9,6 +9,9 @@ const tshirtSchema = new mongoose.Schema({
     data: Buffer,
     contentType: String,
   },
+  path:{
+    type:String
+  },
 
   size: {
     type: String,
