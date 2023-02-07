@@ -4,14 +4,9 @@ const tshirtSchema = new mongoose.Schema({
     type: String,
     minLength: 3,
   },
-  desc: String,
-  img: {
-    data: Buffer,
-    contentType: String,
-  },
-  path:{
-    type:String
-  },
+  description: String,
+  
+  imageURL: String,
 
   size: {
     type: String,
@@ -21,6 +16,9 @@ const tshirtSchema = new mongoose.Schema({
     type: String,
     minLength: 3,
   },
+  price:{
+    type: Number,
+  }
 });
 
 const Tshirt = new mongoose.model("TshirtCollection", tshirtSchema);
