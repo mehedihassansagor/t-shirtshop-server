@@ -19,6 +19,11 @@ const orderSchema = new mongoose.Schema({
       }
     },
   },
+  phone:{
+    type: Number,
+    maximum:12,
+    minimum: 9,
+  },
   productName: String,
   productId: String,
   size: String,
