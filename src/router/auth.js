@@ -5,7 +5,7 @@ const Tshirt = require("../models/tshirt");
 const Order = require("../models/order");
 
 router.get("/", (req, res) => {
-  res.send("this is me from auth");
+  res.send("Data base conected Thankyou!");
 });
 
 // post data tshirt
@@ -13,7 +13,7 @@ router.post("/tshirt", async (req, res) => {
   try {
     const tshirt = new Tshirt(req.body);
     const createTshirtData = await tshirt.save();
-    console.log(createTshirtData);
+    // console.log(createTshirtData);
     res.status(201).send(createTshirtData);
   } catch (err) {
     res.status(400).send(err);
@@ -57,8 +57,8 @@ router.delete("/tshirt/:id", async (req, res) => {
     if (!deleteTshirts) {
       return res.status(400).send();
     }
-    res.send(deleteTshirts);
-    console.log("deletete", deleteTshirts);
+    // res.send(deleteTshirts);
+    // console.log("deletete", deleteTshirts);
   } catch (err) {
     res.status(500).send(err);
   }
@@ -71,7 +71,7 @@ router.post("/order", async (req, res) => {
   try {
     const order = new Order(req.body);
     const createOrder = await order.save();
-    console.log(createOrder);
+    // console.log(createOrder);
     res.status(201).send(createOrder);
   } catch (err) {
     res.status(400).send(err);
@@ -84,9 +84,25 @@ router.get("/order", async (req, res) => {
   try {
     const orderTshirt = await Order.find();
     res.send(orderTshirt);
-    console.log(orderTshirt);
+    // console.log(orderTshirt);
   } catch (err) {
     res.send(err);
+  }
+});
+
+
+//delete order
+router.delete("/order/:id", async (req, res) => {
+  try {
+    const _id = req.params.id;
+    const deleteOrder = await Order.findByIdAndDelete(_id);
+    if (!deleteOrder) {
+      return res.status(400).send();
+    }
+    res.send(deleteOrder);
+    console.log("deletete", deleteOrder);
+  } catch (err) {
+    res.status(500).send(err);
   }
 });
 
